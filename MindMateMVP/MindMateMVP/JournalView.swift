@@ -13,18 +13,23 @@ struct JournalView: View {
     
     var body: some View {
         NavigationStack {
-            VStack {
-                List {
-                    ForEach(user.journals) { journal in
-                        Text(journal.title)
-                            .foregroundStyle(.primary)
+            
+            ZStack {
+                Color.customBlue.edgesIgnoringSafeArea(.all)
+                VStack {
+                    List {
+                        ForEach(user.journals) { journal in
+                            Text(journal.title)
+                                .foregroundStyle(.primary)
+                        }
                     }
-                }
-                
-                Button(action: {
-                    user.addJournal(journal: Journals(title: "Test", content: "Testing Content"))
-                }) {
-                    Text("Add journal")
+                    .scrollContentBackground(.hidden)
+                    
+                    Button(action: {
+                        user.addJournal(journal: Journals(title: "Test", content: "Testing Content"))
+                    }) {
+                        Text("Add journal")
+                    }
                 }
             }
         }

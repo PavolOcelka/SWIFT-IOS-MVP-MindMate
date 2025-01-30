@@ -12,6 +12,8 @@ import SwiftUI
 extension Color {
     static let elementsColor = Color(.sRGB, red: 227/255, green: 255/255, blue: 255/255)
     static let backgroundCustomBlueColor = Color(.sRGB, red: 10/255, green: 45/255, blue: 80/255)
+    static let customBlue = Color(.sRGB, red: 20/255, green: 120/255, blue: 150/255)
+        
 }
 
 //MARK: - Background Gradient
