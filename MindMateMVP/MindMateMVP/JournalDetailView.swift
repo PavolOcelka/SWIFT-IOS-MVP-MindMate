@@ -22,10 +22,18 @@ struct JournalDetailView: View {
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .foregroundStyle(Color.elementsColor)
                             .padding(.horizontal)
-                        Spacer()
+                        Text(journal.date.formatted(date: .abbreviated, time: .omitted))
+                            .frame(maxWidth: .infinity, alignment: .leading)
+                            .padding(.horizontal)
+                            .foregroundStyle(Color.elementsColor)
                     }
                     TextEditor(text: $journal.content)
-                        
+                        .background(Color.elementsColor)
+                        .frame(maxHeight: 400)
+                        .scrollContentBackground(.hidden)
+                        .padding()
+                    
+                    Spacer()
                 }
             }
         }

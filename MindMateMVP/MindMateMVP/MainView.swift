@@ -81,7 +81,7 @@ struct MainView: View {
                             
                             NavigationLink(destination: JournalView()) {
                                 VStack(alignment: .leading) {
-                                    Text("Write about your day into your journal!")
+                                    Text(user.journals.first?.title ?? "Write about your day into your journal!") // NEEDS TO BE CHANGEd to journal content
                                         .font(.subheadline)
                                         .foregroundColor(Color.elementsColor)
                                         .lineLimit(1)
