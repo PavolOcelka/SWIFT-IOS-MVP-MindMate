@@ -31,7 +31,7 @@ struct ProfileView: View {
                     
                     Form {
                         Section("Personal"){
-                            TextField("Name", text: $name)
+                            TextField("Name", text: $user.name) //change to name afte rtesting
                             Picker("Role", selection: $selectedRole) {
                                 ForEach(roles, id: \.self) { role in
                                     Text(role)

@@ -11,7 +11,7 @@ class User: ObservableObject {
     
     //MARK: - Personal User Info
     
-    var name: String = ""
+    @Published var name: String = ""
     var role: String = ""
     
     private(set) var totalSessions: Int = 0
@@ -24,7 +24,7 @@ class User: ObservableObject {
             
     //MARK: - Journal Settings
     
-    var journals: [Journals] = []
+    @Published var journals: [Journals] = []
     
     private(set) var journalStreak: Int = 0
     

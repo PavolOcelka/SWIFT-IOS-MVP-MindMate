@@ -7,6 +7,7 @@
 
 import Foundation
 
+
 struct Journals: Codable, Identifiable{
     var id: UUID = UUID()
     var date: Date = Date()
@@ -14,3 +15,6 @@ struct Journals: Codable, Identifiable{
     var content: String
     
 }
+
+var testJournal = Journals(title: "Test",content: "Hello World")
+

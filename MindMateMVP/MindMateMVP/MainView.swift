@@ -24,6 +24,7 @@ struct MainView: View {
                     //MARK: - Profile
                     VStack {
                         HStack {
+                            Text(user.name)
                             Spacer()
                             NavigationLink(destination: ProfileView()) {
                                 Image(systemName: "person.circle")
@@ -95,6 +96,7 @@ struct MainView: View {
                     }
                 }
                 .blur(radius: isTapped ? 30 : 0)
+                .allowsHitTesting(!isTapped)
                 
                 //MARK: - Character
                 
@@ -119,13 +121,17 @@ struct MainView: View {
                         //MARK: - Buttons under character
                         
                         if isTapped {
-                            VStack(spacing: 20) {
+                            VStack() {
                                 Spacer()
-                                Button(action: {
-                                    user.increaseTotalSessions()
-                                }) {
-                                    Text("Help")
+                                TabView{
+                                        CardView(title: "Stress & Anxiety", description: CardsText.stressAndAnxietyDescription, imageResource: "stressCharacter", destination: StressAnxietyView())
+                                        
+                                    CardView(title: "Sleep", description: CardsText.sleepDescription, imageResource: "stressCharacter",backgroundGradientCard: LinearGradient.sleepCard, destination: StressAnxietyView())
                                 }
+                                .tabViewStyle(.page)
+                                
+                                Text("Tap to start")
+                                    .foregroundStyle(Color.elementsColor)
                                 Spacer()
                             }
                             .padding(.top, geometry.size.height * 0.4)
