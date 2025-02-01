@@ -10,6 +10,7 @@ import SwiftUI
 struct JournalDetailView: View {
     
     @Binding var journal: Journals
+    @State private var fontSize: CGFloat = 17
     
     var body: some View {
         NavigationStack {
@@ -28,11 +29,22 @@ struct JournalDetailView: View {
                             .foregroundStyle(Color.elementsColor)
                     }
                     TextEditor(text: $journal.content)
-                        .background(Color.elementsColor)
                         .frame(maxHeight: 400)
                         .scrollContentBackground(.hidden)
                         .padding()
+                        .foregroundStyle(Color.elementsColor)
+                        .font(.system(size: fontSize))
                     
+                    Slider(
+                        value: $fontSize,
+                        in: 17...35
+                    )
+                    .padding()
+                    .tint(.blue)
+                    .frame(maxWidth: 200)
+                    .background(Color.elementsColor)
+                    .clipShape(Capsule())
+                    .shadow(radius: 10)
                     Spacer()
                 }
             }
