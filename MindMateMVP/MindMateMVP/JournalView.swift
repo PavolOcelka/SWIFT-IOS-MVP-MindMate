@@ -17,15 +17,17 @@ struct JournalView: View {
             ZStack {
                 Color.customBlue.edgesIgnoringSafeArea(.all)
                 VStack {
-                    Text("ToDo's")
+                    Text("Journals").font(.largeTitle.bold())
+                        .foregroundStyle(Color.elementsColor)
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.horizontal)
                     ScrollView {
                         ForEach($user.journals) { $journal in
                             NavigationLink(destination: JournalDetailView(journal: $journal)) {
-                                VStack(spacing: 5){
-                                    HStack {
+                                VStack(spacing: 0){
+                                    HStack(alignment: .top) {
                                         Text(journal.title)
+                                            .multilineTextAlignment(.leading)
                                             .font(.title.bold())
                                             .foregroundStyle(Color.elementsColor)
                                         Spacer()
@@ -33,6 +35,7 @@ struct JournalView: View {
                                             .font(.title)
                                             .foregroundStyle(Color.elementsColor)
                                     }
+                                    .padding(.top)
                                     .padding(.horizontal)
                                     
                                     Text(journal.content)
@@ -40,9 +43,10 @@ struct JournalView: View {
                                         .multilineTextAlignment(.leading)
                                         .frame(maxWidth: .infinity, alignment: .leading)
                                         .padding(.horizontal)
-                                    
+                                    Spacer()
                                 }
-                                .frame(maxWidth: .infinity ,maxHeight: 200)
+                                .frame(maxWidth: .infinity)
+                                .frame(height: 200)
                                 .background(LinearGradient(colors: [
                                     Color(.sRGB, red: 0/255, green: 180/255, blue: 219/255),
                                     Color(.sRGB, red: 0/255, green: 131/255, blue: 176/255)
@@ -62,9 +66,12 @@ struct JournalView: View {
                     
                     Button(action: {
                         user.addJournal(journal: Journals(title: "New Journal Entry", content: "Journal Content..."))
-                        print(user.journals)
+                        print(user.journals.first)
                     }) {
-                        Text("Add journal")
+                        Image(systemName: "plus.circle.fill")
+                            .resizable()
+                            .frame(maxWidth: 50, maxHeight: 50)
+                            .foregroundStyle(Color.elementsColor)
                     }
                 }
             }

@@ -51,7 +51,7 @@ struct MainView: View {
                             }
                             .padding(.horizontal)
                             
-                            NavigationLink(destination: QuoteView()) {
+                            NavigationLink(destination: QuickActionView()) {
                                 VStack(alignment: .leading) {
                                     Text("")
                                 }
@@ -80,11 +80,20 @@ struct MainView: View {
                             .padding(.horizontal)
                             
                             NavigationLink(destination: JournalView()) {
-                                VStack(alignment: .leading) {
+                                VStack {
+                                    Text("Content")
+                                        .foregroundStyle(.secondary)
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                        .padding(.horizontal)
+                                        .padding(.top)
                                     Text(user.journals.first?.content ?? "Write about your day into your journal!") // NEEDS TO BE CHANGEd to journal content
                                         .font(.subheadline)
                                         .foregroundColor(Color.elementsColor)
-                                        .lineLimit(1)
+                                        .multilineTextAlignment(.leading)
+                                        .frame(maxWidth: .infinity, alignment: .leading)
+                                        .padding(.horizontal)
+                                        .padding(.bottom)
+                                    Spacer()
                                 }
                                 .frame(maxWidth: .infinity, maxHeight: 150)
                                 .background(Color(.sRGB, red: 10/255, green: 45/255, blue: 80/255))

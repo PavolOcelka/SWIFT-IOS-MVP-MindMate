@@ -14,23 +14,28 @@ struct jounralLink: View {
                 Color.customBlue.ignoresSafeArea()
                 
                 NavigationLink(destination: MainView()) {
-                    VStack(spacing: 5){
-                        HStack {
-                            Text("Journal")
-                                .font(.largeTitle.bold())
-                                .foregroundStyle(Color.elementsColor)
-                            Spacer()
-                            Text("1.1.2025")
-                                .font(.title)
-                                .foregroundStyle(Color.elementsColor)
+                    VStack(spacing: 0){
+                        VStack {
+                            HStack(alignment: .top){
+                                Text("Journal New Entry NNDn NDndn")
+                                    .multilineTextAlignment(.leading)
+                                    .font(.largeTitle.bold())
+                                    .foregroundStyle(Color.elementsColor)
+                                Spacer()
+                                Text("1.1.2025")
+                                    .font(.title)
+                                    .foregroundStyle(Color.elementsColor)
+                            }
+                            .padding(.top)
+                            .padding(.horizontal)
                         }
-                        .padding(.horizontal)
                         
-                        Text("Content")
+                        Text("Lorem")
                             .foregroundStyle(Color.elementsColor)
                             .multilineTextAlignment(.leading)
                             .frame(maxWidth: .infinity, alignment: .leading)
                             .padding(.horizontal)
+                        Spacer()
                         
                     }
                     .frame(maxWidth: .infinity ,maxHeight: 200)
