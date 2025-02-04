@@ -5,11 +5,14 @@
 //  Created by Pavol Ocelka on 30/01/2025.
 //
 
+import SwiftData
 import SwiftUI
 
 struct MainView: View {
     
     @EnvironmentObject var user: User
+    @Query(sort: \Journals.date) private var journals: [Journals]
+
     
     @State private var isTapped = false
     
@@ -44,9 +47,11 @@ struct MainView: View {
                         
                         VStack(spacing: 0){
                             HStack {
-                                Text("Quote")
-                                    .font(.title.bold())
-                                    .foregroundStyle(Color.elementsColor)
+                                NavigationLink(destination: QuickActionView()){
+                                    Text("Quick Actions")
+                                        .font(.title.bold())
+                                        .foregroundStyle(Color.elementsColor)
+                                }
                                 Spacer()
                             }
                             .padding(.horizontal)
@@ -73,7 +78,7 @@ struct MainView: View {
                                     .foregroundStyle(Color.elementsColor)
                                 Spacer()
                                 
-                                Text("1.1.2025")
+                                Text(journals.first?.date.formatted(date: .abbreviated, time: .omitted) ?? Date.now.formatted(date: .abbreviated, time: .omitted))
                                     .font(.title2.bold())
                                     .foregroundStyle(Color.elementsColor)
                             }
@@ -81,12 +86,12 @@ struct MainView: View {
                             
                             NavigationLink(destination: JournalView()) {
                                 VStack {
-                                    Text("Content")
-                                        .foregroundStyle(.secondary)
+                                    Text(journals.first?.title ?? "Journal Title")
                                         .frame(maxWidth: .infinity, alignment: .leading)
                                         .padding(.horizontal)
                                         .padding(.top)
-                                    Text(user.journals.first?.content ?? "Write about your day into your journal!") // NEEDS TO BE CHANGEd to journal content
+                                    
+                                    Text(journals.first?.content ?? "Write about your day into your journal!") // NEEDS TO BE CHANGEd to journal content
                                         .font(.subheadline)
                                         .foregroundColor(Color.elementsColor)
                                         .multilineTextAlignment(.leading)

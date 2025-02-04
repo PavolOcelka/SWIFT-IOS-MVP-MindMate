@@ -5,11 +5,13 @@
 //  Created by Pavol Ocelka on 30/01/2025.
 //
 
+import SwiftData
 import SwiftUI
 
 struct JournalView: View {
     
-    @EnvironmentObject var user: User
+    @Environment(\.modelContext) var context
+    @Query(sort: \Journals.date) var journals: [Journals]
     
     var body: some View {
         NavigationStack {
@@ -22,11 +24,11 @@ struct JournalView: View {
                         .frame(maxWidth: .infinity, alignment: .leading)
                         .padding(.horizontal)
                     ScrollView {
-                        ForEach($user.journals) { $journal in
-                            NavigationLink(destination: JournalDetailView(journal: $journal)) {
+                        ForEach(journals) { journal in
+                            NavigationLink(destination: JournalDetailView(journal: journal)) {
                                 VStack(spacing: 0){
                                     HStack(alignment: .top) {
-                                        Text(journal.title)
+                                        Text(journal.title != "" ? journal.title : "New Journal Entry")
                                             .multilineTextAlignment(.leading)
                                             .font(.title.bold())
                                             .foregroundStyle(Color.elementsColor)
@@ -38,7 +40,7 @@ struct JournalView: View {
                                     .padding(.top)
                                     .padding(.horizontal)
                                     
-                                    Text(journal.content)
+                                    Text(journal.content != "" ? journal.content : "No content yet")
                                         .foregroundStyle(Color.elementsColor)
                                         .multilineTextAlignment(.leading)
                                         .frame(maxWidth: .infinity, alignment: .leading)
@@ -59,14 +61,21 @@ struct JournalView: View {
                             .background(.clear)
                             
                         }
-                        .onDelete(perform: deleteJournal)
                     }
                     .listStyle(.plain)
                     .scrollContentBackground(.hidden)
                     
                     Button(action: {
-                        user.addJournal(journal: Journals(title: "New Journal Entry", content: "Journal Content..."))
-                        print(user.journals.first)
+                        let newJournal = Journals(date: .now, title: "", content: "")
+                        context.insert(newJournal)
+                        print(journals.first)
+                        print(context)
+                        
+                        do {
+                            try context.save()
+                        } catch {
+                            print("Error when saving: \(error.localizedDescription)")
+                        }
                     }) {
                         Image(systemName: "plus.circle.fill")
                             .resizable()
@@ -78,9 +87,6 @@ struct JournalView: View {
         }
     }
     
-    func deleteJournal(at offsets: IndexSet){
-        user.journals.remove(atOffsets: offsets)
-    }
 }
 
 #Preview {

@@ -6,15 +6,19 @@
 //
 
 import Foundation
+import SwiftData
 
-
-struct Journals: Codable, Identifiable{
-    var id: UUID = UUID()
+@Model
+class Journals {
     var date: Date = Date()
     var title: String = "Journal Entry"
-    var content: String
+    var content: String = ""
     
+    init(date: Date, title: String, content: String) {
+        self.date = date
+        self.title = title
+        self.content = content
+    }
 }
 
-var testJournal = Journals(title: "Test",content: "Hello World")
 

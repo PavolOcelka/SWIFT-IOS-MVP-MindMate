@@ -6,15 +6,19 @@
 //
 
 import Foundation
+import SwiftData
 
+@Model
 class User: ObservableObject {
     
     //MARK: - Personal User Info
     
-    @Published var name: String = ""
+    var name: String = ""
     var role: String = ""
     
     private(set) var totalSessions: Int = 0
+    
+    
     
     func increaseTotalSessions() {
         totalSessions += 1
@@ -23,18 +27,13 @@ class User: ObservableObject {
     
             
     //MARK: - Journal Settings
-    
-    @Published var journals: [Journals] = []
-    
+        
     private(set) var journalStreak: Int = 0
     
     func increaseJournalStreak() {
         journalStreak += 1
     }
     
-    func addJournal(journal: Journals) {
-        journals.insert(journal, at: 0)
-    }
     
-    
+    init() {}
 }
