@@ -12,11 +12,10 @@ import SwiftUI
 struct MindMateMVPApp: App {
     
     @StateObject private var user =  User()
-    @StateObject private var userSettings = UserSettings()
     
     let container: ModelContainer = {
             do {
-                let schema = Schema([Journals.self])
+                let schema = Schema([Journals.self, MoodModel.self])
                 return try ModelContainer(for: schema, configurations: [])
             } catch {
                 fatalError("Error creating ModelContainer:\(error.localizedDescription)")
@@ -27,7 +26,6 @@ struct MindMateMVPApp: App {
         WindowGroup {
             MainView()
                 .environmentObject(user)
-                .environmentObject(userSettings)
                 .modelContainer(container)
         }
     }

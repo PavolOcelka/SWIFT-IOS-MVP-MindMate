@@ -11,7 +11,7 @@ import SwiftUI
 struct JournalView: View {
     
     @Environment(\.modelContext) var context
-    @Query(sort: \Journals.date) var journals: [Journals]
+    @Query(sort: \Journals.date, order: .reverse) var journals: [Journals]
     
     var body: some View {
         NavigationStack {

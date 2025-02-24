@@ -10,7 +10,7 @@ struct CardsText {
 You are in control. Take a deep breath. A little pause can make a big difference.
 """
     static var sleepDescription = """
-Give your mind a break and let go of the day. A calm body and mind are the first steps to restful sleep.
+Give your mind a break and let go of the day. Get restful sleep.
 """
     
     
