@@ -68,8 +68,6 @@ struct JournalView: View {
                     Button(action: {
                         let newJournal = Journals(date: .now, title: "", content: "")
                         context.insert(newJournal)
-                        print(journals.first)
-                        print(context)
                         
                         do {
                             try context.save()
@@ -82,6 +80,7 @@ struct JournalView: View {
                             .frame(maxWidth: 50, maxHeight: 50)
                             .foregroundStyle(Color.elementsColor)
                     }
+                    .padding(.bottom, 16)
                 }
             }
         }

@@ -27,6 +27,7 @@ struct MindMateMVPApp: App {
             MainView()
                 .environmentObject(user)
                 .modelContainer(container)
+                .colorScheme(.light)
         }
     }
 }

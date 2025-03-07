@@ -13,7 +13,22 @@ struct MoodDetailView: View {
     @State private var fontSize: CGFloat = 17
     @Bindable var mood: MoodModel
     
-    var moodsCategory = ["Happy", "Sad", "Angry", "Surprised", "Confused", "Fearful","Anxious"]
+    var moodsCategory = [
+        // Happy
+        "Happy", "Joy", "Contentment", "Gratitude", "Pride", "Hope", "Love", "Relief",
+        // Sad
+        "Sad", "Sadness", "Loneliness", "Nostalgia", "Grief",
+        // Angry
+        "Angry", "Anger", "Frustration", "Irritation", "Rage",
+        // Anxious
+        "Anxious", "Anxiety", "Worry", "Overwhelm", "Panic",
+        // Confused
+        "Confused", "Confusion", "Doubt", "Indecision", "Disorientation",
+        // Fearful
+        "Fearful", "Fear", "Insecurity", "Dread", "Terror",
+        // Surprised
+        "Surprised", "Surprise", "Awe", "Amazement", "Shock"
+    ]
     
     var body: some View {
         NavigationStack {
@@ -25,9 +40,17 @@ struct MoodDetailView: View {
                         HStack {
                             TextField("Title", text: $mood.mood)
                                 .font(.largeTitle.bold())
+                                .multilineTextAlignment(.leading)
                                 .foregroundStyle(Color.elementsColor)
                                 .autocorrectionDisabled()
                                 .textInputAutocapitalization(.never)
+                            NavigationLink(destination: FeelingsView()) {
+                                Image(systemName: "text.book.closed.fill")
+                                    .resizable()
+                                    .frame(width: 20, height: 25)
+                            }
+                            .foregroundStyle(Color.elementsColor)
+                            .padding()
                             Button(action: {
                                 deleteMood()
                             }){
@@ -53,7 +76,7 @@ struct MoodDetailView: View {
                             }
                         }
                     }
-                    .frame(height: 100)
+                    .frame(height: 80)
                     .scrollContentBackground(.hidden)
                     
                     
@@ -63,7 +86,7 @@ struct MoodDetailView: View {
                     .textInputAutocapitalization(.never)
                     .frame(maxHeight: 400)
                     .scrollContentBackground(.hidden)
-                    .padding()
+                    .padding(.horizontal)
                     .foregroundStyle(Color.elementsColor)
                     .font(.system(size: fontSize))
                     

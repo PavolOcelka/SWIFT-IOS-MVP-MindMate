@@ -6,10 +6,10 @@
 //
 
 struct CardsText {
-    static var stressAndAnxietyDescription = """
+    static let stressAndAnxietyDescription = """
 You are in control. Take a deep breath. A little pause can make a big difference.
 """
-    static var sleepDescription = """
+    static let sleepDescription = """
 Give your mind a break and let go of the day. Get restful sleep.
 """
     

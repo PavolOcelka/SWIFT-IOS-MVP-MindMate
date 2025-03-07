@@ -31,16 +31,15 @@ struct MainView: View {
                             Text(user.name)
                             Spacer()
                             NavigationLink(destination: FeelingsView()) {
-                                Image(systemName: "person.circle")
+                                Image(systemName: "text.book.closed.fill")
                                     .resizable()
-                                    .frame(width: 40, height: 40)
+                                    .frame(width: 20, height: 25)
                             }
                             .foregroundStyle(Color.elementsColor)
                             .padding()
                         }
                         Spacer()
                     }
-                    .hidden()
                     
                     
                     //MARK: - Quote Stack
@@ -129,8 +128,9 @@ struct MainView: View {
                         } label: {
                             Image("appcharacter")
                                 .resizable()
-                                .frame(width: 200, height: 200)
-                                .scaleEffect(isTapped ? 1.5 : 1.0)
+                                .scaledToFit()
+                                .scaleEffect(isTapped ? 1.0 : 0.8)
+                                .frame(maxHeight: min(geometry.size.height * 0.4, 400))
                                 .shadow(radius: isTapped ? 20 : 0)
                         }
                         .position(
@@ -145,7 +145,7 @@ struct MainView: View {
                                 Spacer()
                                 TabView{
                                         CardView(title: "Stress & Anxiety", description: CardsText.stressAndAnxietyDescription, imageResource: "stressCharacter", destination: StressAnxietyView())
-                                    CardView(title: "Sleep", description: CardsText.sleepDescription, imageResource: "stressCharacter",backgroundGradientCard: LinearGradient.sleepCard, destination: SleepView())
+                                    CardView(title: "Sleep", description: CardsText.sleepDescription, imageResource: "sleeping",backgroundGradientCard: LinearGradient.sleepCard, destination: SleepView())
                                 }
                                 .tabViewStyle(.page)
                                 
@@ -163,52 +163,60 @@ struct MainView: View {
     
     func gradientForCategory(_ category: String) -> LinearGradient {
         switch category {
-        case "Happy":
+        // Happy
+        case "Happy", "Joy", "Contentment", "Gratitude", "Pride", "Hope", "Love", "Relief":
             return LinearGradient(colors: [
-                Color(.sRGB, red: 168/255, green: 224/255, blue: 99/255), // Bright Geen
+                Color(.sRGB, red: 168/255, green: 224/255, blue: 99/255), // Bright Green
                 Color(.sRGB, red: 86/255, green: 171/255, blue: 47/255)  // Golden Green
             ], startPoint: .top, endPoint: .bottom)
             
-        case "Sad":
+        // Sad
+        case "Sad", "Sadness", "Loneliness", "Nostalgia", "Grief":
             return LinearGradient(colors: [
                 Color(.sRGB, red: 0/255, green: 0/255, blue: 255/255),   // Blue
                 Color(.sRGB, red: 0/255, green: 0/255, blue: 128/255)   // Dark Blue
             ], startPoint: .top, endPoint: .bottom)
             
-        case "Angry":
+        // Angry
+        case "Angry", "Anger", "Frustration", "Irritation", "Rage":
             return LinearGradient(colors: [
                 Color(.sRGB, red: 255/255, green: 0/255, blue: 0/255),  // Red
-                Color(.sRGB, red: 128/255, green: 0/255, blue: 0/255)    // Dark Red
+                Color(.sRGB, red: 128/255, green: 0/255, blue: 0/255)  // Dark Red
             ], startPoint: .top, endPoint: .bottom)
             
-        case "Surprised":
+        // Anxious
+        case "Anxious", "Anxiety", "Worry", "Overwhelm", "Panic":
             return LinearGradient(colors: [
-                Color(.sRGB, red: 255/255, green: 105/255, blue: 180/255), // Pink
-                Color(.sRGB, red: 255/255, green: 20/255, blue: 147/255)  // Deep Pink
+                Color(.sRGB, red: 255/255, green: 165/255, blue: 0/255),   // Orange
+                Color(.sRGB, red: 200/255, green: 100/255, blue: 0/255)   // Dark Orange
             ], startPoint: .top, endPoint: .bottom)
             
-        case "Confused":
+        // Confused
+        case "Confused", "Confusion", "Doubt", "Indecision", "Disorientation":
             return LinearGradient(colors: [
                 Color(.sRGB, red: 128/255, green: 128/255, blue: 128/255), // Gray
                 Color(.sRGB, red: 64/255, green: 64/255, blue: 64/255)     // Dark Gray
             ], startPoint: .top, endPoint: .bottom)
             
-        case "Fearful":
+        // Fearful
+        case "Fearful", "Fear", "Insecurity", "Dread", "Terror":
             return LinearGradient(colors: [
                 Color(.sRGB, red: 128/255, green: 0/255, blue: 128/255),   // Purple
-                Color(.sRGB, red: 75/255, green: 0/255, blue: 130/255)      // Indigo
+                Color(.sRGB, red: 75/255, green: 0/255, blue: 130/255)    // Indigo
             ], startPoint: .top, endPoint: .bottom)
             
-        case "Anxious":
+        // Surprised
+        case "Surprised", "Surprise", "Awe", "Amazement", "Shock":
             return LinearGradient(colors: [
-                Color(.sRGB, red: 255/255, green: 165/255, blue: 0/255),   // Orange
-                Color(.sRGB, red: 200/255, green: 100/255, blue: 0/255)     // Dark Orange
+                Color(.sRGB, red: 255/255, green: 105/255, blue: 180/255), // Pink
+                Color(.sRGB, red: 255/255, green: 20/255, blue: 147/255)   // Deep Pink
             ], startPoint: .top, endPoint: .bottom)
             
+        // Default
         default:
             return LinearGradient(colors: [
                 Color(.sRGB, red: 0/255, green: 180/255, blue: 219/255),   // Default Blue
-                Color(.sRGB, red: 0/255, green: 131/255, blue: 176/255)     // Darker Blue
+                Color(.sRGB, red: 0/255, green: 131/255, blue: 176/255)    // Darker Blue
             ], startPoint: .top, endPoint: .bottom)
         }
     }
