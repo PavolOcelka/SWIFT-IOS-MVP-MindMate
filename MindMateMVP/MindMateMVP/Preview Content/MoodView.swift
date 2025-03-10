@@ -67,16 +67,7 @@ struct MoodView: View {
                     .listStyle(.plain)
                     .scrollContentBackground(.hidden)
                     
-                    Button(action: {
-                        let newMood = MoodModel(date: .now, mood: "", content: "")
-                        context.insert(newMood)
-                        
-                        do {
-                            try context.save()
-                        } catch {
-                            print("Error when saving: \(error.localizedDescription)")
-                        }
-                    }) {
+                    Button(action: {addNewMood()}) {
                         Image(systemName: "plus.circle.fill")
                             .resizable()
                             .frame(maxWidth: 50, maxHeight: 50)
@@ -85,6 +76,17 @@ struct MoodView: View {
                     .padding(.bottom, 16)
                 }
             }
+        }
+    }
+    
+    func addNewMood() {
+        let newMood = MoodModel(date: .now, mood: "", content: "")
+        context.insert(newMood)
+        
+        do {
+            try context.save()
+        } catch {
+            print("Error when saving: \(error.localizedDescription)")
         }
     }
     

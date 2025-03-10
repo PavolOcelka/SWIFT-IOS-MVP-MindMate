@@ -3,58 +3,52 @@ import SwiftUI
 
 struct FeelingsView: View {
     let feelings: [(name: String, description: String)] = [
-        // Happy
-        ("Happy", "Feeling good and positive"),
-        ("Joy", "Intense happiness and delight"),
-        ("Contentment", "Peaceful satisfaction"),
-        ("Gratitude", "Thankful for what you have"),
-        ("Pride", "Satisfaction in your achievements"),
-        ("Hope", "Optimism for the future"),
-        ("Love", "Deep affection and care"),
-        ("Relief", "Release from stress or worry"),
+        ("Happy", "A general feeling of well-being, positivity, and satisfaction"),
+        ("Joy", "A strong, uplifting feeling of happiness and delight, often spontaneous"),
+        ("Contentment", "A sense of peaceful satisfaction, often from achieving balance or comfort"),
+        ("Gratitude", "A thankful feeling, appreciating what you have or the kindness you’ve received"),
+        ("Pride", "A sense of accomplishment and self-worth derived from your achievements"),
+        ("Hope", "A feeling of optimism and positive expectation for the future"),
+        ("Love", "A deep and caring affection for someone or something, often creating a sense of connection"),
+        ("Relief", "A feeling of release from stress, worry, or a challenging situation"),
         
-        // Sad
-        ("Sad", "Feeling down or unhappy"),
-        ("Sadness", "Deep sorrow or grief"),
-        ("Loneliness", "Feeling alone or disconnected"),
-        ("Nostalgia", "Longing for the past"),
-        ("Grief", "Deep sadness after a loss"),
+        ("Sad", "A feeling of unhappiness, often due to loss or disappointment"),
+        ("Sadness", "A deep, lingering feeling of sorrow or grief, often connected to personal loss"),
+        ("Loneliness", "A feeling of being alone or disconnected, even in the presence of others"),
+        ("Nostalgia", "A sentimental longing or wistful affection for past experiences or times"),
+        ("Grief", "An intense, often overwhelming sadness caused by loss, such as the death of a loved one"),
         
-        // Angry
-        ("Angry", "Feeling mad or upset"),
-        ("Anger", "Strong frustration or rage"),
-        ("Frustration", "Feeling stuck or blocked"),
-        ("Irritation", "Mild annoyance or impatience"),
-        ("Rage", "Intense, uncontrollable anger"),
+        ("Angry", "A feeling of irritation, frustration, or upset due to something perceived as unfair or wrong"),
+        ("Anger", "A strong emotional response to frustration, often with feelings of rage or hostility"),
+        ("Frustration", "A feeling of being blocked or unable to achieve something you desire or need"),
+        ("Irritation", "A mild feeling of annoyance or impatience, often triggered by small inconveniences"),
+        ("Rage", "An intense, overwhelming form of anger that can lead to loss of control"),
         
-        // Anxious
-        ("Anxious", "Feeling nervous or worried"),
-        ("Anxiety", "Persistent worry or fear"),
-        ("Worry", "Concern about potential problems"),
-        ("Overwhelm", "Feeling unable to cope"),
-        ("Panic", "Sudden intense fear or anxiety"),
+        ("Anxious", "A feeling of nervousness or worry, often about uncertain outcomes or situations"),
+        ("Anxiety", "A persistent, ongoing feeling of unease or fear about future events or possibilities"),
+        ("Worry", "A feeling of concern or anxiety about potential problems or challenges"),
+        ("Overwhelm", "A feeling of being unable to manage responsibilities or emotions, often leading to stress"),
+        ("Panic", "A sudden and intense feeling of fear or anxiety, often accompanied by physical symptoms like rapid heart rate or shortness of breath"),
         
-        // Confused
-        ("Confused", "Feeling uncertain or unclear"),
-        ("Confusion", "Lack of understanding"),
-        ("Doubt", "Uncertainty about decisions"),
-        ("Indecision", "Difficulty making choices"),
-        ("Disorientation", "Feeling lost or unsure"),
+        ("Confused", "A feeling of uncertainty or lack of clarity, often accompanied by difficulty in decision-making"),
+        ("Confusion", "A lack of understanding or mental clarity, often resulting in a sense of being lost or unsure"),
+        ("Doubt", "A feeling of uncertainty about a decision, action, or belief, often leading to indecisiveness"),
+        ("Indecision", "Difficulty making choices or reaching conclusions, often due to conflicting thoughts or feelings"),
+        ("Disorientation", "A feeling of being mentally or physically lost, with difficulty in understanding direction or purpose"),
         
-        // Fearful
-        ("Fearful", "Feeling scared or afraid"),
-        ("Fear", "Alertness to danger or threat"),
-        ("Insecurity", "Lack of confidence"),
-        ("Dread", "Anticipation of something bad"),
-        ("Terror", "Intense, overwhelming fear"),
+        ("Fearful", "A general feeling of being scared, nervous, or apprehensive about something threatening"),
+        ("Fear", "An emotional response to a perceived danger or threat, often with physical symptoms like increased heart rate"),
+        ("Insecurity", "A lack of confidence or certainty in oneself or one's surroundings, often leading to feelings of vulnerability"),
+        ("Dread", "A strong sense of unease or apprehension, often in anticipation of a negative event"),
+        ("Terror", "An intense, overwhelming feeling of fear, often leading to a loss of control or panic"),
         
-        // Surprised
-        ("Surprised", "Feeling caught off guard"),
-        ("Surprise", "Reaction to the unexpected"),
-        ("Awe", "Feeling of wonder or amazement"),
-        ("Amazement", "Overwhelmed by something grand"),
-        ("Shock", "Sudden intense surprise")
+        ("Surprised", "A feeling of being caught off guard or experiencing something unexpected"),
+        ("Surprise", "An emotional reaction to something unforeseen or unfamiliar, often involving shock or amazement"),
+        ("Awe", "A feeling of deep respect or admiration, often accompanied by a sense of wonder at something impressive or grand"),
+        ("Amazement", "A feeling of astonishment or overwhelming wonder at something extraordinary or unexpected"),
+        ("Shock", "A sudden, intense emotional response to something completely unexpected or startling")
     ]
+
     
     var body: some View {
         NavigationStack {
@@ -70,18 +64,25 @@ struct FeelingsView: View {
                     ScrollView {
                         VStack(spacing: 12) {
                             ForEach(feelings, id: \.name) { feeling in
-                                VStack(alignment: .leading, spacing: 4) {
-                                    Text(feeling.name)
-                                        .font(.headline)
-                                        .foregroundStyle(Color.elementsColor)
-                                    
-                                    Text(feeling.description)
-                                        .font(.subheadline)
-                                        .foregroundStyle(Color.elementsColor.opacity(0.8))
+                                HStack(alignment: .top) {
+                                    VStack(alignment: .leading, spacing: 4) {
+                                        Text(feeling.name)
+                                            .font(.headline)
+                                            .foregroundStyle(Color.elementsColor)
+                                        
+                                        Text(feeling.description)
+                                            .font(.subheadline)
+                                            .foregroundStyle(Color.elementsColor.opacity(0.8))
+                                    }
+                                    Spacer()
+                                    Circle()
+                                        .frame(maxWidth: 20)
+                                        .foregroundStyle(gradientForCategory(feeling.name))
+                                        .shadow(radius: 5)
                                 }
                                 .frame(maxWidth: .infinity, alignment: .leading)
                                 .padding()
-                                .background(gradientForCategory(feeling.name))
+                                .background(Color.backgroundCustomBlueColor)
                                 .cornerRadius(10)
                                 .shadow(radius: 5)
                             }

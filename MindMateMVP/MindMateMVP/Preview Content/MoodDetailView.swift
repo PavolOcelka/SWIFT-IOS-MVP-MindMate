@@ -27,7 +27,10 @@ struct MoodDetailView: View {
         // Fearful
         "Fearful", "Fear", "Insecurity", "Dread", "Terror",
         // Surprised
-        "Surprised", "Surprise", "Awe", "Amazement", "Shock"
+        "Surprised", "Surprise", "Awe", "Amazement", "Shock",
+        
+        //DEFAULT
+        "Normal"
     ]
     
     var body: some View {
@@ -40,6 +43,7 @@ struct MoodDetailView: View {
                         HStack {
                             TextField("Title", text: $mood.mood)
                                 .font(.largeTitle.bold())
+                                .minimumScaleFactor(0.5)
                                 .multilineTextAlignment(.leading)
                                 .foregroundStyle(Color.elementsColor)
                                 .autocorrectionDisabled()
